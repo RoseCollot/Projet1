@@ -10,5 +10,5 @@ Ce cahier suit le progrès realisé par les membres du groupe.
 **Rose** : Création .girignore
 
 **Chloe** : Création d'un environnement conda 
-**Chloe** : Téléchargement des génomes 
+**Chloe** : Téléchargement des génomes
 `dataset download genome accession <genome_id> --filename <genome_name>`
