@@ -10,5 +10,8 @@ Ce cahier suit le progrès realisé par les membres du groupe.
 **Rose** : Création .girignore
 
 **Chloe** : Création d'un environnement conda 
+`conda create -n projet_env`
+**Chloe** : Installation de NCBI dataset dans l'environnement
+`conda install -c conda-forge ncbi_dataset-cli`
 **Chloe** : Téléchargement des génomes
 `dataset download genome accession <genome_id> --filename <genome_name>`
