@@ -133,6 +133,7 @@ Creation de script diagrammes_contaminants.py pour représenter graphiquement et
 * Installation de seaborn:
 `conda install -c conda-forge seaborn`
 
+
 **Chloe**
 
 Création de fichier pour les sequences proteiques des genomes:
@@ -161,11 +162,11 @@ Oedothorax gibbosus:
 Dezippage des fichiers avec `unzip`
 
 
-
 ## 16/10
 
 **Rose**
 Bibliographie : https://pmc.ncbi.nlm.nih.gov/articles/PMC9997750/
+
 Analayse de l'abondance de chaque espèce à partir des resultsts de kraken : 
 Oedothorax Gibbosus: 
 `bracken -d ./databases/kraken_db_8/ -i ./kraken_outputs/oedothorax.kreport -o ./kraken_outputs/oedothorax.bracken`
@@ -186,7 +187,6 @@ Creation de fichiers pour chaque espèce dans results:
 Utilisation de OMAmer pour créer des fichiers .omamer pour utiliser Omark.
 
 Tentatives OMAmer multi-thread échouée – manque de RAM
-
 Pour Tropilaelaps mercedesae:
 `omamer search --db /data/projet1/databases/omark_db/LUCA.h5 --query /data/projet1/data/genome_protein/Tropilaelaps_mercedesae/ncbi_dataset/data/GCA_002081605.1/protein.faa --out /data/projet1/results/Tropilaelaps_mercedesae.omamer --nthreads 1`
 Pour Oppiella nova:
@@ -198,6 +198,7 @@ Pour Oedothorax gibbosus:
 * `--nthreads 1` pas assez de RAM pour plus de threads
 
 ***
+
 Utilisation de Omark:
 input: fichier.omamer crée avec Omamer
 Pour Tropilaelaps mercedesae:
@@ -210,6 +211,17 @@ Pour Trichonephila clavata:
 
 **Ikram**
 Representation graphiquement et sous forme de tableaux excel des résultats de Omark pour chaque génome (/data/projet1/results/diagrammes/omark).
+
+*
+
+* Utilisation de l'outil Centrifuge pour l'analyse taxonomique des contaminants:
+* Création de l’environnement Conda et intallation de k'outil:
+`conda create -n centrifuge_env python=3.6`
+`conda install bioconda::centrifuge`
+`conda install -c bioconda blast`
+
+
+
 
 `conda create -n centrifuge_env python=3.11 -y`
 `conda activate centrifuge_env`
