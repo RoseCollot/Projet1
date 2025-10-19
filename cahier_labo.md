@@ -11,7 +11,7 @@ Ce cahier suit le progrès realisé par les membres du groupe.
 **Rose** : Création .girignore
 
 **Ikram** : Recherche bibliographique: fichier Word (ciblée sur la problématique de la contamination génomique):
-* Étude l’impact des séquences contaminantes sur la qualité des assemblages génomiques.
+* Étude de l’impact des séquences contaminantes sur la qualité des assemblages génomiques.
 * Identification de méthodes et outils de détection et de quantification des contaminations.
 * Analyse de certaines stratégies pour isoler ou corriger les séquences.
 * Publications et références scientifiques pertinents pour debuter.
@@ -43,13 +43,13 @@ Téléchargés sur:
 **Ikram** 
 * Dézippage (placés dans genome) + creation de nouveaux environnements conda pour chacun des outils (contrôle qualité de l’ensemble des génomes):
 
-* Ajout de channel bioconda, conda forage.
+* Ajout de channel bioconda, conda forage et le canal par defaut:
 `conda config --env --add channels bioconda` 
 `conda config --env --add channels conda-forge`
 `conda config --env --set channel_priority strict`
 Commande utilisé pour chacun des outils.
 
-* Création de l’environnement Conda avec bonne version Python 
+* Création de l’environnement Conda avec la bonne version Python. 
 
 * Installation de BUSCO (v6.0) dans l'environnement busco_env
 `conda create -n busco_env python -y`
@@ -133,7 +133,7 @@ Creation de script diagrammes_contaminants.py pour représenter graphiquement et
 
 * Installation de seaborn:
 `conda install -c conda-forge seaborn`
-
+* Diagrammes placés dans results.
 
 **Chloe**
 
@@ -209,9 +209,10 @@ Pour Oppiella nova:
 Pour Trichonephila clavata:
 `omark --file /data/projet1/results/omark/Trichonephila_clavata/Trichonephila_clavata.omamer --database /data/projet1/databases/omark_db/LUCA.h5 --outputFolder /data/projet1/results/omark/Trichonephila_clavata`
 
+##17/10/2025 - 19/10/2025
 
 **Ikram**
-* Representation graphique et sous forme de tableaux excel des résultats de l'outil Omark pour chacun des 5 génomes, placés dans Resultats.
+* Representation graphique et sous forme de tableaux excel des résultats de l'outil Omark pour chacun des 4 génomes, placés dans results.
 
 * Utilisation de l'outil Centrifuge pour l'analyse taxonomique des contaminants:
 * Création de l’environnement Conda et intallation de l'outil:
@@ -237,8 +238,9 @@ Trichonephila_clavata:
 Tropilaelaps_mercedesae:
 `centrifuge -x /data/projet1/databases/centrifuge_db/library/k2_standard -U /data/projet1/data/genome/tropilaelaps_mercedesae/ncbi_dataset/data/GCA_002081605.1/GCA_002081605.1_TMercedes_1.0_genomic.fna -S /data/projet1/results/centrifuge/tropilaelaps_mercedesae.out --report-file /data/projet1/results/centrifuge/tropilaelaps_mercedesae.report`
 
+*Remarque:
+Les 5 commandes n'ont pas été lancées car construction d'index Centrifuge consomme beaucoup de RAM (killed par le système) Analyse toujours en cours...
 
-##17/10/2025 - 19/10/2025
 
 **Chloe**
 
