@@ -10,7 +10,12 @@ Ce cahier suit le progrès realisé par les membres du groupe.
 **Rose** : Creation de Github repository : https://github.com/RoseCollot/Projet1
 **Rose** : Création .girignore
 
-**Ikram** : Recherche bibliographique: fichier Word (ciblée sur la problématique de la contamination génomique).
+**Ikram** : Recherche bibliographique: fichier Word (ciblée sur la problématique de la contamination génomique):
+* Étude l’impact des séquences contaminantes sur la qualité des assemblages génomiques.
+* Identification de méthodes et outils de détection et de quantification des contaminations.
+* Analyse de certaines stratégies pour isoler ou corriger les séquences.
+* Publications et références scientifiques pertinents pour debuter.
+
 
 **Chloe** : Création d'un environnement conda 
 `conda create -n projet_env`
@@ -35,21 +40,32 @@ Téléchargés sur:
 **Chloe** : Installation de 'unzip' dans l'environnement virtuel.
 `conda install -c conda-forge unzip`
 
-**Ikram** : Dézippage (placés dans genome) + creation de nouveaux environnements conda pour chacun des outils (contrôle qualité de l’ensemble des génomes):
+**Ikram** 
+* Dézippage (placés dans genome) + creation de nouveaux environnements conda pour chacun des outils (contrôle qualité de l’ensemble des génomes):
+
 * Ajout de channel bioconda, conda forage.
+`conda config --env --add channels bioconda` 
+`conda config --env --add channels conda-forge`
+`conda config --env --set channel_priority strict`
+Commande utilisé pour chacun des outils.
+
 * Création de l’environnement Conda avec bonne version Python 
+
 * Installation de BUSCO dans l'environnement busco_env
 `conda create -n busco_env python -y`
--> conda install bioconda::busco
+-> `conda install bioconda::busco`
+
 * Installation de OMARK dans environnement omark_env:
 `conda create -n omark_env python -y` 
--> conda install bioconda::omark
+-> `conda install bioconda::omark`
+
 * Installation de QUAST dans l'environnement quast_env 
 `conda create -n quast_env python`
--> conda install bioconda::quast
+-> `conda install bioconda::quast`
+
 * Installation de KRAKEN (v2.1.6) (identifier la taxonomie et détecter les contaminations) dans l'environnement kraken_env
 `onda create -n kraken_env python -y`
--> conda install bioconda::kraken
+-> `conda install bioconda::kraken`
 
 ## 04/10/2025
 
@@ -64,6 +80,15 @@ Telechargement de la base de donnée pour kraken : Standard 16
 Decompression de la database 
 `tar -xvzf ./k2_standard_16_GB_20250714.tar.gz` 
 
+**Chloe**
+Suppression de repositoire cloné de git.
+
+Création de fichier omark_db dans databases:
+`mkdir databases/omark_db/LUCA.h5`
+
+Téléchargement de la base de données LUCA pour OMARK
+`wget https://omamer-database-link/LUCA.h5`  *(chemin local : /data/projet1/databases/omark_db/LUCA.h5)*
+
 ## 14/10 
 
 **Rose** 
@@ -76,23 +101,124 @@ Décompression de la database
 ## 15/10
 **Rose**
 Lancement de la classification des reads 
-Pour nephilia philipes:
-`kraken2 --db ./databases/kraken_db_8/ --output ./kraken_outputs/nephilia_out.txt --report ./kraken_outputs/nephilia.kreport ./data/genome/nephila_pilipes/ncbi_dataset/data/GCA_019974015.1/GCA_019974015.1_Npil_1.0_genomic.fna `
-Pour oedothorax giggosus:
+Pour Nephila Pilipes:
+`kraken2 --db ./databases/kraken_db_8/ --output ./kraken_outputs/nephila.txt --report ./kraken_outputs/nephila.kreport ./data/genome/nephila_pilipes/ncbi_dataset/data/GCA_019974015.1/GCA_019974015.1_Npil_1.0_genomic.fna `
+Pour Oedothorax Giggosus:
 `kraken2 --db ./databases/kraken_db_8/ --output ./kraken_outputs/oedothorax.txt --report ./kraken_outputs/oedothorax.kreport /data/projet1/data/genome/oedothorax_gibbosus/ncbi_dataset/data/GCA_019343175.1/GCA_019343175.1_Ogib_1.0_genomic.fna`
-Pour oppiela nova : 
+Pour Oppiela Nova : 
 `kraken2 --db ./databases/kraken_db_8/ --output ./kraken_outputs/oppiela.txt --report ./kraken_outputs/oppiela.kreport /data/projet1/data/genome/oppiella_nova/ncbi_dataset/data/GCA_905397405.1/GCA_905397405.1_1_On_b1v03.max_arth_b2g_droso_b2g_emblv2_genomic.fna`
-Pour trichonephila clavata : 
+Pour Trichonephila Clavata : 
 `kraken2 --db ./databases/kraken_db_8/ --output ./kraken_outputs/trichonephila.txt --report ./kraken_outputs/trichonephila.kreport /data/projet1/data/genome/trichonephila_clavata/ncbi_dataset/data/GCA_019973975.1/GCA_019973975.1_Tnct_1.0_genomic.fna `
-Pour tropilaelaps mercedesae :
+Pour Tropilaelaps Mercedesae :
 `kraken2 --db ./databases/kraken_db_8/ --output ./kraken_outputs/tropilaelaps.txt --report ./kraken_outputs/tropilaelaps.kreport /data/projet1/data/genome/tropilaelaps_mercedesae/ncbi_dataset/data/GCA_002081605.1/GCA_002081605.1_T._mercedesae_v01_genomic.fna `
 
 Installation de Bracken (v3.1) dans l'environnement kraken_env : 
 `conda install bioconda::bracken`
+Analayse de l'abondance de chaque espèce à partir des resultsts de kraken pour Nephila Pilipes: 
+`bracken -d ./databases/kraken_db_8/ -i ./kraken_outputs/nephila.kreport -o ./kraken_outputs/nephila.bracken`
+
+**Ikram**
+* Diagrammes des contaminants:
+Creation de script diagrammes_contaminants.py pour représenter graphiquement et sous forme de tableaux excel les résultats de Bracken pour chaque génome (/data/projet1/results/diagrammes/bracken)
+
+* Creation d'environnement pour l'analyse des contaminants: contaminants_env
+`conda create -n contaminants_env python=3.11`
+* Intallation de packages pythons necessaires:
+* Installation de pandas (lecture):
+`conda install -c conda-forge pandas`
+
+* Installation de matplotlib (creation diagrammes):
+`conda install -c conda-forge matplotlib`
+
+* Installation de seaborn:
+`conda install -c conda-forge seaborn`
+
+**Chloe**
+
+Création de fichier pour les sequences proteiques des genomes:
+`mkdir data/genome_protein`
+
+Creation de fichiers pour chaque espèce dans results:
+`mkdir data/genome_protein/<nom_espèce>`
+
+Téléchargement des genomes avec sequences protéiques fasta (.faa) de ncbi dans le fichier de l'espèce:
+
+Trichonephila_clavata:
+`datasets download genome accession GCA_019973975.1 --include protein`
+
+Tropilaelaps mercedesae:
+`datasets download genome accession GCA_002081605.1 --include protein`
+
+Oppiella nova:
+`datasets download genome accession GCA_905397405.1 --include protein`
+
+Nephila pilipes:
+`datasets download genome accession GCA_019974015.1 --include protein`
+
+Oedothorax gibbosus:
+`datasets download genome accession GCA_019343175.1 --include protein`
+
+Dezippage des fichiers avec `unzip`
+
+
+
+## 16/10
+
+**Rose**
+Bibliographie : https://pmc.ncbi.nlm.nih.gov/articles/PMC9997750/
 Analayse de l'abondance de chaque espèce à partir des resultsts de kraken : 
-`bracken -d ./databases/kraken_db_8/ -i ./kraken_outputs/nephilia.kreport -o ./kraken_outputs/nephilia.bracken`
+Oedothorax Gibbosus: 
+`bracken -d ./databases/kraken_db_8/ -i ./kraken_outputs/oedothorax.kreport -o ./kraken_outputs/oedothorax.bracken`
+Pour Oppiela Nova : 
+`bracken -d ./databases/kraken_db_8/ -i ./kraken_outputs/oppiela.kreport -o ./kraken_outputs/oppiela.bracken`
+Pour Trichonephila Clavata : 
+`bracken -d ./databases/kraken_db_8/ -i ./kraken_outputs/trichonephila.kreport -o ./kraken_outputs/trichonephila.bracken`
+Pour Tropilaelaps Mercedesae :
+`bracken -d ./databases/kraken_db_8/ -i ./kraken_outputs/tropilaelaps.kreport -o ./kraken_outputs/tropilaelaps.bracken`
+
+**Chloe**
+Creation de fichier omark dans results:
+`mkdir results/omark`
+
+Creation de fichiers pour chaque espèce dans results:
+`mkdir results/omark/<nom_espèce>`
+
+Utilisation de OMAmer pour créer des fichiers .omamer pour utiliser Omark.
+
+Tentatives OMAmer multi-thread échouée – manque de RAM
+
+Pour Tropilaelaps mercedesae:
+`omamer search --db /data/projet1/databases/omark_db/LUCA.h5 --query /data/projet1/data/genome_protein/Tropilaelaps_mercedesae/ncbi_dataset/data/GCA_002081605.1/protein.faa --out /data/projet1/results/Tropilaelaps_mercedesae.omamer --nthreads 1`
+Pour Oppiella nova:
+`omamer search --db /data/projet1/databases/omark_db/LUCA.h5 --query /data/projet1/data/genome_protein/Oppiella_nova/ncbi_dataset/data/GCA_905397405.1/protein.faa --out /data/projet1/results/Oppiella_nova.omamer --nthreads 1`
+Pour Trichonephila clavata:
+`omamer search --db /data/projet1/databases/omark_db/LUCA.h5 --query /data/projet1/data/genome_protein/Trichonephila_clavata/ncbi_dataset/data/GCA_019973975.1/protein.faa --out /data/projet1/results/Trichonephila_clavata.omamer --nthreads 1`
+Pour Oedothorax gibbosus:
+`omamer search --db /data/projet1/databases/omark_db/LUCA.h5 --query /data/projet1/data/genome_protein/Oedothorax_gibbosus/ncbi_dataset/data/GCA_019343175.1/protein.faa --out /data/projet1/results/Oedothorax_gibbosus.omamer --threads 1`
+* `--nthreads 1` pas assez de RAM pour plus de threads
+
+***
+Utilisation de Omark:
+input: fichier.omamer crée avec Omamer
+Pour Tropilaelaps mercedesae:
+`omark --file /data/projet1/results/omark/Tropilaelaps_mercedesae/Tropilaelaps_mercedesae.omamer --database /data/projet1/databases/omark_db/LUCA.h5 --outputFolder /data/projet1/results/omark/Tropilaelaps_mercedesae` 
+Pour Oppiella nova:
+`omark --file /data/projet1/results/omark/Oppiella_nova/Oppiella_nova.omamer --database /data/projet1/databases/omark_db/LUCA.h5 --outputFolder /data/projet1/results/omark/Oppiella_nova`
+Pour Trichonephila clavata:
+`omark --file /data/projet1/results/omark/Trichonephila_clavata/Trichonephila_clavata.omamer --database /data/projet1/databases/omark_db/LUCA.h5 --outputFolder /data/projet1/results/omark/Trichonephila_clavata`
 
 
+**Ikram**
+Representation graphiquement et sous forme de tableaux excel des résultats de Omark pour chaque génome (/data/projet1/results/diagrammes/omark).
+
+`conda create -n centrifuge_env python=3.11 -y`
+`conda activate centrifuge_env`
+
+`conda install bioconda::centrifuge`
 
 
+##17/10/2025 - 19/10/2025
 
+**Chloe**
+
+Plusieurs tentatives OMAmer pour Nephila pilipes échouées
