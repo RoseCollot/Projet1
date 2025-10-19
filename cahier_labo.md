@@ -51,15 +51,15 @@ Commande utilisé pour chacun des outils.
 
 * Création de l’environnement Conda avec bonne version Python 
 
-* Installation de BUSCO dans l'environnement busco_env
+* Installation de BUSCO (v6.0) dans l'environnement busco_env
 `conda create -n busco_env python -y`
 -> `conda install bioconda::busco`
 
-* Installation de OMARK dans environnement omark_env:
+* Installation de OMARK (v0.3.1) dans environnement omark_env:
 `conda create -n omark_env python -y` 
 -> `conda install bioconda::omark`
 
-* Installation de QUAST dans l'environnement quast_env 
+* Installation de QUAST (v5.3.0) dans l'environnement quast_env 
 `conda create -n quast_env python`
 -> `conda install bioconda::quast`
 
@@ -119,15 +119,16 @@ Analayse de l'abondance de chaque espèce à partir des resultsts de kraken pour
 
 **Ikram**
 * Diagrammes des contaminants:
-Creation de script diagrammes_contaminants.py pour représenter graphiquement et sous forme de tableaux excel les résultats de Bracken pour chaque génome (/data/projet1/results/diagrammes/bracken)
+Creation de script diagrammes_contaminants.py pour représenter graphiquement et sous forme de tableaux excel les résultats de Bracken pour chacun des 5 génomes:
 
 * Creation d'environnement pour l'analyse des contaminants: contaminants_env
 `conda create -n contaminants_env python=3.11`
+
 * Intallation de packages pythons necessaires:
-* Installation de pandas (lecture):
+* Installation de pandas:
 `conda install -c conda-forge pandas`
 
-* Installation de matplotlib (creation diagrammes):
+* Installation de matplotlib:
 `conda install -c conda-forge matplotlib`
 
 * Installation de seaborn:
@@ -210,23 +211,31 @@ Pour Trichonephila clavata:
 
 
 **Ikram**
-Representation graphiquement et sous forme de tableaux excel des résultats de Omark pour chaque génome (/data/projet1/results/diagrammes/omark).
-
-*
+* Representation graphique et sous forme de tableaux excel des résultats de l'outil Omark pour chacun des 5 génomes, placés dans Resultats.
 
 * Utilisation de l'outil Centrifuge pour l'analyse taxonomique des contaminants:
-* Création de l’environnement Conda et intallation de k'outil:
-`conda create -n centrifuge_env python=3.6`
+* Création de l’environnement Conda et intallation de l'outil:
+`conda create -n centrifuge_env python=3.11 -y`
 `conda install bioconda::centrifuge`
 `conda install -c bioconda blast`
 
+Telechargement database:
+`wget https://genome-idx.s3.amazonaws.com/centrifuge/k2_standard_08_GB_20250714.tar.gz`
 
+Nephila_pilipes:
+``centrifuge -x /data/projet1/databases/centrifuge_db/library/k2_standard \ -U /data/projet1/data/genome/nephila_pilipes/ncbi_dataset/data/GCA_019974015.1/GCA_019974015.1_Npil_1 0_genomic.fna \ -S /data/projet1/results/centrifuge/nephila_pilipes.out \ --report-file /data/projet1/results/centrifuge/nephila_pilipes.report`
 
+Oedothorax_gibbosus:
+`centrifuge -x /data/projet1/databases/centrifuge_db/library/k2_standard -U /data/projet1/data/genome/oedothorax_gibbosus/ncbi_dataset/data/GCA_019343175.1/GCA_019343175.1_OGibb_1.0_genomic.fna -S /data/projet1/results/centrifuge/oedothorax_gibbosus.out --report-file /data/projet1/results/centrifuge/oedothorax_gibbosus.report`
 
-`conda create -n centrifuge_env python=3.11 -y`
-`conda activate centrifuge_env`
+Oppiella_nova:
+`centrifuge -x /data/projet1/databases/centrifuge_db/library/k2_standard -U /data/projet1/data/genome/oppiella_nova/ncbi_dataset/data/GCA_905397405.1/GCA_905397405.1_ONova_1.0_genomic.fna -S /data/projet1/results/centrifuge/oppiella_nova.out --report-file /data/projet1/results/centrifuge/oppiella_nova.report`
 
-`conda install bioconda::centrifuge`
+Trichonephila_clavata:
+`centrifuge -x /data/projet1/databases/centrifuge_db/library/k2_standard -U /data/projet1/data/genome/trichonephila_clavata/ncbi_dataset/data/GCA_019973975.1/GCA_019973975.1_Tclav_1.0_genomic.fna -S /data/projet1/results/centrifuge/trichonephila_clavata.out --report-file /data/projet1/results/centrifuge/trichonephila_clavata.report`
+
+Tropilaelaps_mercedesae:
+`centrifuge -x /data/projet1/databases/centrifuge_db/library/k2_standard -U /data/projet1/data/genome/tropilaelaps_mercedesae/ncbi_dataset/data/GCA_002081605.1/GCA_002081605.1_TMercedes_1.0_genomic.fna -S /data/projet1/results/centrifuge/tropilaelaps_mercedesae.out --report-file /data/projet1/results/centrifuge/tropilaelaps_mercedesae.report`
 
 
 ##17/10/2025 - 19/10/2025
