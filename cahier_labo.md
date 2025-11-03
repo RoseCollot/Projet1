@@ -14,7 +14,7 @@ Ce cahier suit le progrès realisé par les membres du groupe.
 * Étude de l’impact des séquences contaminantes sur la qualité des assemblages génomiques.
 * Identification de méthodes et outils de détection et de quantification des contaminations.
 * Analyse de certaines stratégies pour isoler ou corriger les séquences.
-* Publications et références scientifiques pertinents pour debuter.
+* Publications et références scientifiques pertinentes pour debuter.
 
 
 **Chloe** : Création d'un environnement conda 
@@ -63,7 +63,7 @@ Commande utilisé pour chacun des outils.
 `conda create -n quast_env python`
 -> `conda install bioconda::quast`
 
-* Installation de KRAKEN (v2.1.6) (identifier la taxonomie et détecter les contaminations) dans l'environnement kraken_env
+* Installation de KRAKEN (v2.1.6) dans l'environnement kraken_env
 `onda create -n kraken_env python -y`
 -> `conda install bioconda::kraken`
 
@@ -105,8 +105,8 @@ Pour Nephila Pilipes:
 `kraken2 --db ./databases/kraken_db_8/ --output ./kraken_outputs/nephila.txt --report ./kraken_outputs/nephila.kreport ./data/genome/nephila_pilipes/ncbi_dataset/data/GCA_019974015.1/GCA_019974015.1_Npil_1.0_genomic.fna `
 Pour Oedothorax Giggosus:
 `kraken2 --db ./databases/kraken_db_8/ --output ./kraken_outputs/oedothorax.txt --report ./kraken_outputs/oedothorax.kreport /data/projet1/data/genome/oedothorax_gibbosus/ncbi_dataset/data/GCA_019343175.1/GCA_019343175.1_Ogib_1.0_genomic.fna`
-Pour Oppiela Nova : 
-`kraken2 --db ./databases/kraken_db_8/ --output ./kraken_outputs/oppiela.txt --report ./kraken_outputs/oppiela.kreport /data/projet1/data/genome/oppiella_nova/ncbi_dataset/data/GCA_905397405.1/GCA_905397405.1_1_On_b1v03.max_arth_b2g_droso_b2g_emblv2_genomic.fna`
+Pour Oppiella Nova : 
+`kraken2 --db ./databases/kraken_db_8/ --output ./kraken_outputs/oppiela.txt --report ./kraken_outputs/oppiella.kreport /data/projet1/data/genome/oppiella_nova/ncbi_dataset/data/GCA_905397405.1/GCA_905397405.1_1_On_b1v03.max_arth_b2g_droso_b2g_emblv2_genomic.fna`
 Pour Trichonephila Clavata : 
 `kraken2 --db ./databases/kraken_db_8/ --output ./kraken_outputs/trichonephila.txt --report ./kraken_outputs/trichonephila.kreport /data/projet1/data/genome/trichonephila_clavata/ncbi_dataset/data/GCA_019973975.1/GCA_019973975.1_Tnct_1.0_genomic.fna `
 Pour Tropilaelaps Mercedesae :
@@ -171,8 +171,8 @@ Bibliographie : https://pmc.ncbi.nlm.nih.gov/articles/PMC9997750/
 Analayse de l'abondance de chaque espèce à partir des resultsts de kraken : 
 Oedothorax Gibbosus: 
 `bracken -d ./databases/kraken_db_8/ -i ./kraken_outputs/oedothorax.kreport -o ./kraken_outputs/oedothorax.bracken`
-Pour Oppiela Nova : 
-`bracken -d ./databases/kraken_db_8/ -i ./kraken_outputs/oppiela.kreport -o ./kraken_outputs/oppiela.bracken`
+Pour Oppiella Nova : 
+`bracken -d ./databases/kraken_db_8/ -i ./kraken_outputs/oppiella.kreport -o ./kraken_outputs/oppiella.bracken`
 Pour Trichonephila Clavata : 
 `bracken -d ./databases/kraken_db_8/ -i ./kraken_outputs/trichonephila.kreport -o ./kraken_outputs/trichonephila.bracken`
 Pour Tropilaelaps Mercedesae :
@@ -224,7 +224,7 @@ Telechargement database:
 `wget https://genome-idx.s3.amazonaws.com/centrifuge/k2_standard_08_GB_20250714.tar.gz`
 
 Nephila_pilipes:
-``centrifuge -x /data/projet1/databases/centrifuge_db/library/k2_standard \ -U /data/projet1/data/genome/nephila_pilipes/ncbi_dataset/data/GCA_019974015.1/GCA_019974015.1_Npil_1 0_genomic.fna \ -S /data/projet1/results/centrifuge/nephila_pilipes.out \ --report-file /data/projet1/results/centrifuge/nephila_pilipes.report`
+`centrifuge -x /data/projet1/databases/centrifuge_db/library/k2_standard \ -U /data/projet1/data/genome/nephila_pilipes/ncbi_dataset/data/GCA_019974015.1/GCA_019974015.1_Npil_1 0_genomic.fna \ -S /data/projet1/results/centrifuge/nephila_pilipes.out \ --report-file /data/projet1/results/centrifuge/nephila_pilipes.report`
 
 Oedothorax_gibbosus:
 `centrifuge -x /data/projet1/databases/centrifuge_db/library/k2_standard -U /data/projet1/data/genome/oedothorax_gibbosus/ncbi_dataset/data/GCA_019343175.1/GCA_019343175.1_OGibb_1.0_genomic.fna -S /data/projet1/results/centrifuge/oedothorax_gibbosus.out --report-file /data/projet1/results/centrifuge/oedothorax_gibbosus.report`
@@ -239,9 +239,46 @@ Tropilaelaps_mercedesae:
 `centrifuge -x /data/projet1/databases/centrifuge_db/library/k2_standard -U /data/projet1/data/genome/tropilaelaps_mercedesae/ncbi_dataset/data/GCA_002081605.1/GCA_002081605.1_TMercedes_1.0_genomic.fna -S /data/projet1/results/centrifuge/tropilaelaps_mercedesae.out --report-file /data/projet1/results/centrifuge/tropilaelaps_mercedesae.report`
 
 *Remarque:
-Les 5 commandes n'ont pas été lancées car construction d'index Centrifuge consomme beaucoup de RAM (killed par le système) Analyse toujours en cours...
+Les 5 commandes n'ont pas pu être lancées car construction d'index Centrifuge consomme beaucoup de RAM (killed par le système) Analyse toujours en cours...
 
 
 **Chloe**
 
 Plusieurs tentatives OMAmer pour Nephila pilipes échouées
+
+## 2/11 
+
+**Rose**
+Installation de Pandas (v2.3.3) dans l'environnement projet_env
+`conda install anaconda::pandas`
+
+Creation d'un dossier 'contaminants_contigs' dans le dossier 'results', qui contient des sous-dossier pour chaque espèce.
+Dans chaque sous-dossier, creation de'un csv vide qui sera remplis par la suit.
+
+Creation d'un script Python 'extract_contigs.py' qui remplie un fichier csv avec l'identifiant du contig et l'identifiant taxinomique de l'espèce à qui il appartient 
+
+Installation de Biopython (v1.85) dans l'environnement projet_env 
+`conda install anaconda::biopython`
+
+Modification du code afin ce créer pour chaque espèce, un fichier Fasta par espèce contaminant afin de les utiliser par la suite pour l'aligment 
+
+Nephila pilipes:
+`python3 /data/projet1/scripts/extract_contigs.py /data/projet1/results/kraken/nephila.txt /data/projet1/results/contaminants_contigs/nephila/nephila.csv /data/projet1/results/contaminants_contigs /data/projet1/data/genome/nephila_pilipes/ncbi_dataset/data/GCA_019974015.1/GCA_019974015.1_Npil_1.0_genomic.fna /data/projet1/results/bracken/nephila.bracken`
+
+Oedothorax gibbosus:
+`python3 /data/projet1/scripts/extract_contigs.py /data/projet1/results/kraken/oedothorax.txt /data/projet1/results/contaminants_contigs/oedothorax/oedothorax.csv /data/projet1/results/contaminants_contigs /data/projet1/data/genome/oedothorax_gibbosus/ncbi_dataset/data/GCA_019343175.1/GCA_019343175.1_Ogib_1.0_genomic.fna /data/projet1/results/bracken/oedothorax.bracken`
+
+Oppiella nova:
+`python3 /data/projet1/scripts/extract_contigs.py /data/projet1/results/kraken/oppiella.txt /data/projet1/results/contaminants_contigs/oppiella/oppiella.csv /data/projet1/results/contaminants_contigs /data/projet1/data/genome/oppiella_nova/ncbi_dataset/data/GCA_905397405.1/GCA_905397405.1_1_On_b1v03.max_arth_b2g_droso_b2g_emblv2_genomic.fna /data/projet1/results/bracken/oppiella.bracken`
+
+Trichonephila clavata:
+`python3 /data/projet1/scripts/extract_contigs.py /data/projet1/results/kraken/trichonephila.txt /data/projet1/results/contaminants_contigs/trichonephila/trichonephila.csv /data/projet1/results/contaminants_contigs /data/projet1/data/genome/trichonephila_clavata/ncbi_dataset/data/GCA_019973975.1/GCA_019973975.1_Tnct_1.0_genomic.fna /data/projet1/results/bracken/trichonephila.bracken`
+
+Tropilaelaps mercedesae:
+`python3 /data/projet1/scripts/extract_contigs.py /data/projet1/results/kraken/tropilaelaps.txt /data/projet1/results/contaminants_contigs/tropilaelaps/tropilaelaps.csv /data/projet1/results/contaminants_contigs /data/projet1/data/genome/tropilaelaps_mercedesae/ncbi_dataset/data/GCA_002081605.1/GCA_002081605.1_T._mercedesae_v01_genomic.fna /data/projet1/results/bracken/tropilaelaps.bracken`
+
+## 3/11 
+
+**Rose** 
+Deletion de la databse Kraken afin de gagner de l'espace de stockage 
+
