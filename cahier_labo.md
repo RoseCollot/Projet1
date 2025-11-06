@@ -22,7 +22,7 @@ Ce cahier suit le progrès realisé par les membres du groupe.
 **Chloe** : Installation de NCBI dataset dans l'environnement
 `conda install -c conda-forge ncbi_dataset-cli`
 **Chloe** : Téléchargement des génomes
-`dataset download genome accession <genome_id> --filename <genome_name>`
+`datasets download genome accession <genome_id> --filename <genome_name>`
 
 Téléchargés sur:
 * Nephilia pilipes https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_019974015.1/
@@ -280,5 +280,63 @@ Tropilaelaps mercedesae:
 ## 3/11 
 
 **Rose** 
-Deletion de la databse Kraken afin de gagner de l'espace de stockage 
+Deletion de la databse Kraken afin de gagner de l'espace de stockage
 
+Installation de SRA tools 
+`conda install bioconda::sra-tools`
+Configuration pour que les données soient téléchargées dans le répertoire actuel 
+`vdb-config --prefetch-to-cwd`
+
+`prefetch SRX9657695` (id trouvé sur la page NCBI du génome)
+Création de fichier FASTQ (en séparant les lectures paired-ends) à partir du fichier SRA
+`fastq-dump --split-files --gzip ./data/projet1/data/genome/oedothorax_gibbosus/sra_data/SRR13225165/SRR13225165.sra -O /data/projet1/data/genome/oedothorax_gibbosus/fastq`
+
+**Ikram** 
+
+BLAST des séquences FASTA identifiées comme contaminants dans Oedothorax gibbosus :
+
+Outil: https://blast.ncbi.nlm.nih.gov/Blast.cgi
+BLAST nucleotide (blastn) contre la base NCBI nr/nt pour identifier l’espèce:
+
+Sequences testées et résultats:
+
+- 55601 -> Hylyphantes graminicola (18S rRNA), 99,42% identité
+
+- 931100.fasta -> Wolbachia endosymbiont (strain wOegibbosus-W744x776A), 98,37% identité
+
+- 2720720.fasta -> Candidatus Rhabdoclamydia Rhabdochlamydia oedothoracis, 87,65% identité
+
+
+## 6/11
+
+**Chloe**
+
+Téléchargement des genomes de reference des espèces contaminantes dans Oedothorax gibbosus du ncbi. (Dans fichier 'references' dans 'data')
+
+- Wolbachia endosymbiont of Oedothorax gibbosus:
+(strain : wOegibbosus-W744x776B)
+`dataset download genome accession GCF_936270145.1 --filename wolbachia`
+Plus d'information: https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_936270145.1/
+
+- Candidatus Rhabdochlamydia oedothoracis:
+(isolate: W744xW776)
+`datasets download genome accession GCF_019453995.1 --filename candidatus`
+Plus d'information: https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_019453995.1/
+
+- Hylyphantes graminicola (C'est la seule espèce des Hylyphantes qui possède un génome dans ncbi)
+`datasets download genome accession GCF_019453995.1 --filename candidatus`
+Plus d'information: https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_023701765.1/
+
+
+**Ikram**
+
+Mapping des lectures sur genomes contaminants:
+on peut prendre wolbachia comme principal
+faire indexationde genomes dabord
+bowtie2: assembleur qui necessite peu de RAM
+comparaison du fichier sam
+
+-creation d'environnemnet mapping dans conda
+-installation de bowtie 2
+
+(je fais la suite du mapping ce soir)
