@@ -326,11 +326,13 @@ Plus d'information: https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_019453995.1
 `datasets download genome accession GCF_019453995.1 --filename candidatus`
 Plus d'information: https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_023701765.1/
 
-**Rose***
+**Rose**
+
 Telechargement des nouveaux reads (ancien code SRA incorrect)
 `prefetch SRR13225169 SRR13225170`
 `fastq-dump --split-files --gzip ./reads/sra/SRR13225170.sra -O ./projet1/data/reads/fastq/ &`
 `fastq-dump --split-files --gzip ./reads/sra/SRR13225169.sra -O ./projet1/data/reads/fastq/ &`
+
 
 **Ikram**
 
@@ -344,6 +346,27 @@ Mapping des lectures sur genomes des contaminants:
 - comparaison des fichiers de sortie 
 - sortie fichier fasta
 - controle qualité des fichiers
+
+-Versions des outils:
+
+Minimap2: 2.30-r1287
+Samtools: 1.22.1
+SPAdes: 4.2.0
+
+indexation wolbachia 
+`minimap2 -d /data/projet1/data/references/wolbachia.mmi /data/projet1/data/references/wolbachia.fna`
+
+mapping du contaminant wolbachia sur les reads de 
+`minimap2 -ax map-pb /data/projet1/data/references/wolbachia.mmi /data/projet1/data/reads/fastq/SRR13225169_1.fastq.gz > /data/projet1/results/mapping/wolbachia_SRR13225169.sam`
+
+Conversion du fichier SAM en BAM indexé:
+`samtools view -bS /data/projet1/results/mapping/wolbachia_SRR13225169.sam | samtools sort -o /data/projet1/results/mapping/wolbachia_SRR13225169.bam && samtools index /data/projet1/results/mapping/wolbachia_SRR13225169.bam`
+
+verification finale de presence de contaminant sur le génome:
+
+`samtools view -b -F 4 wolbachia_SRR13225169.bam > wolbachia_aligned.bam` 
+
+indexation hylyphantes
 
 ## 7/11
 
