@@ -1,6 +1,23 @@
 # Projet 1 (PTU) 
 ## Détection, caractérisation et assemblage de génomes contaminants dans des données génomiques d’arachnides
 
+<img src="https://srs.britishspiders.org.uk/cache/fe4dc530.jpg" width="150" height="150">
+
+<img src="https://indiabiodiversity.org/files-api/api/get/crop/observations//7e82c75b-3d21-4f42-869f-925118e84594/1a9764ac700e4a96865df3ed0544479e.jpg?h=500" width="150" height="150">
+
+<img src="https://singapore.biodiversity.online/taxo4254/mainSpace/files/Np.%20pilipes%20%28female%29.jpg" width="150" height="150">
+
+<img src="https://beeaware.org.au/wp-content/uploads/2014/04/Tropilaelaps-7.jpg" width="150" height="150">
+
+<img src="https://happymag.tv/wp-content/uploads/2021/09/Oppiella-nova-beetle-mite-1.jpg" width="150" height="150">
+
+Images: Tylan Berry (https://srs.britishspiders.org.uk)
+Devin (https://indiabiodiversity.org)
+Starmer, F. (https://singapore.biodiversity.online)
+Ken Walker Museum Victoria, PADIL (https://beeaware.org.au/archive-pest/tropilaelaps-2)
+Nature World News (https://www.natureworldnews.com)
+
+
 ### Description
 
 Ce projet vise à détecter, quantifier et confirmer la présence de séquences de contamination dans cinq génomes d’araignées disponibles sur NCBI.  
@@ -25,15 +42,44 @@ Lectures SRA associées aux génomes pour le mapping final.
 
 ### Outils et logiciels
 
-- Kraken2 version 2.1.6 
-- Bracken version 3.1 
-- OMAmer version 2.1.0 
-- OMArk version 0.3.1 
-- BLASTn NCBI (en ligne) 
-- Minimap2 
-- Python, Pandas et Matplotlib 
-- SRA-Tools
-- Conda
+Nous avons créé plusiers environnements virtuels avec conda pour installer les outils et logiciels nécessaires. Ces environnements se trouvent dans le dossier 'conda'.
+
+Dans l'environnement 'projet_env' :
+- ncbi-datasets-cli version 18.7.0
+- sra-tools version 3.2.1
+- unzip version 6.0
+- python version 3.13.9
+
+Dans l'environnement 'kraken_env' :
+- kraken2 version 2.1.6 
+- bracken version 3.1 
+- blast version 2.17.0
+- python version 3.13.7
+
+Dans l'environnement 'omark_env' :
+- omamer version 2.1.0 
+- omark version 0.3.1 
+- python version 3.10.19
+
+Dans l'environnement 'mapping_env' :
+- minimap2 version 2.30
+- miniprot version 0.18
+- muscle version 3.8.1551
+- samtools version 1.22.1
+- python version 3.11.14
+
+Dans l'environnement 'contaminants_env' :
+- seaborn version 0.13.2
+- python version 3.11.14
+
+Dans l'ensemble du projet :
+- pandas version 2.3.3
+- matplotlib version 3.10.6
+- seaborn version
+- ncbi-vdb version 3.2.1
+
+- BLASTn NCBI (en ligne) lien du site: https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome
+
 
 ### Méthodes 
 
