@@ -92,7 +92,7 @@ Téléchargement de la base de données LUCA pour OMARK
 ## 14/10 
 
 **Rose** 
-Suppression de la abse de données Standard 16 par manque de mémoire RAM disponible 
+Suppression de la base de données Standard 16 par manque de mémoire RAM disponible 
 Telechargement de la base de donnée Kraken : Standard 8 (8Gb)
 `wget https://genome-idx.s3.amazonaws.com/kraken/k2_standard_08_GB_20250714.tar.gz`
 Décompression de la database 
@@ -127,10 +127,8 @@ Creation de script diagrammes_contaminants.py pour représenter graphiquement et
 * Intallation de packages pythons necessaires:
 * Installation de pandas:
 `conda install -c conda-forge pandas`
-
 * Installation de matplotlib:
 `conda install -c conda-forge matplotlib`
-
 * Installation de seaborn:
 `conda install -c conda-forge seaborn`
 * Diagrammes placés dans results.
@@ -239,7 +237,7 @@ Tropilaelaps_mercedesae:
 `centrifuge -x /data/projet1/databases/centrifuge_db/library/k2_standard -U /data/projet1/data/genome/tropilaelaps_mercedesae/ncbi_dataset/data/GCA_002081605.1/GCA_002081605.1_TMercedes_1.0_genomic.fna -S /data/projet1/results/centrifuge/tropilaelaps_mercedesae.out --report-file /data/projet1/results/centrifuge/tropilaelaps_mercedesae.report`
 
 *Remarque:
-Les 5 commandes n'ont pas pu être lancées car construction d'index Centrifuge consomme beaucoup de RAM (killed par le système) Analyse toujours en cours...
+Les 5 commandes n'ont pas pu être lancées Centrifuge consomme beaucoup de RAM (killed par le système). Analyse toujours en cours...
 
 
 **Chloe**
@@ -293,7 +291,8 @@ Création de fichier FASTQ (en séparant les lectures paired-ends) à partir du 
 
 **Ikram** 
 
-BLAST des séquences FASTA identifiées comme contaminants dans Oedothorax gibbosus :
+Les contigs identifiés comme suspects contaminants sur le genome Oedothorax gibbosus par Kraken/Bracken ont été extraits et soumis à une analyse BLAST nucleotide (blastn) contre la base NCBI nr/nt: 
+
 
 Outil: https://blast.ncbi.nlm.nih.gov/Blast.cgi
 BLAST nucleotide (blastn) contre la base NCBI nr/nt pour identifier l’espèce:
@@ -327,16 +326,27 @@ Plus d'information: https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_019453995.1
 `datasets download genome accession GCF_019453995.1 --filename candidatus`
 Plus d'information: https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_023701765.1/
 
+**Rose***
+Telechargement des nouveaux reads (ancien code SRA incorrect)
+`prefetch SRR13225169 SRR13225170`
+`fastq-dump --split-files --gzip ./reads/sra/SRR13225170.sra -O ./projet1/data/reads/fastq/ &`
+`fastq-dump --split-files --gzip ./reads/sra/SRR13225169.sra -O ./projet1/data/reads/fastq/ &`
 
 **Ikram**
 
-Mapping des lectures sur genomes contaminants:
-on peut prendre wolbachia comme principal
-faire indexationde genomes dabord
-bowtie2: assembleur qui necessite peu de RAM
-comparaison du fichier sam
+Mapping des lectures sur genomes des contaminants:
+ (wolbachia comme contaminant principal)
 
--creation d'environnemnet mapping dans conda
--installation de bowtie 2
+- creation d'environnemnet mapping dans conda
+- installation de aligneur Minimap2:
+ `conda install bioconda::minimap2`
+- indexation de genomes 
+- comparaison des fichiers de sortie 
+- sortie fichier fasta
+- controle qualité des fichiers
 
-(je fais la suite du mapping ce soir)
+## 7/11
+
+**Chloë**
+
+Rédaction du README
