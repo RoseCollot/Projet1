@@ -75,4 +75,25 @@ Scripts utilisés dans le dossier ***scripts***
 
 En raison de contraintes de temps et de ressources informatiques certaines analyses (Centrifuge, OMArk sur Nephila pilipes…) n’ont pas pu être finalisées. Nous aurions souhaité comparer davantage d’outils.
 
-### Auters
+### Auteurs
+
+**Rose Collot**
+**Ikram Hejjaj**
+**Chloë Bateman**
+
+Master 2 Bioinformatique et Bioimagerie Structurale
+
+Université de Strasbourg
+
+Cours: Projet Tutoré en BBS
+
+Tuteur: Yannis Nevers
+
+### Remerciements
+
+Nous tenons à remercier notre tuteur Yannis Nevers pour son accompagnement, sa disponibilité et ses idées qui ont permis de réaliser ce projet. 
+
+Nous tenons également à remercier l'université de Strasbourg de nous avoir donné accès au serveur sur lesquel nous avons travaillé.
+
+
+
