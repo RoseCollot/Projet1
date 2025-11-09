@@ -119,7 +119,7 @@ Analayse de l'abondance de chaque espèce à partir des resultsts de kraken pour
 
 **Ikram**
 * Diagrammes des contaminants:
-Creation de script diagrammes_contaminants.py pour représenter graphiquement et sous forme de tableaux excel les résultats de Bracken pour chacun des 5 génomes:
+Creation de script diagrammes_contaminants.py pour représenter graphiquement et sous forme de tableaux excel les résultats de Bracken pour chacun des 5 génomes (placé dans scripts)
 
 * Creation d'environnement pour l'analyse des contaminants: contaminants_env
 `conda create -n contaminants_env python=3.11`
@@ -237,7 +237,7 @@ Tropilaelaps_mercedesae:
 `centrifuge -x /data/projet1/databases/centrifuge_db/library/k2_standard -U /data/projet1/data/genome/tropilaelaps_mercedesae/ncbi_dataset/data/GCA_002081605.1/GCA_002081605.1_TMercedes_1.0_genomic.fna -S /data/projet1/results/centrifuge/tropilaelaps_mercedesae.out --report-file /data/projet1/results/centrifuge/tropilaelaps_mercedesae.report`
 
 *Remarque:
-Les 5 commandes n'ont pas pu être lancées Centrifuge consomme beaucoup de RAM (killed par le système). Analyse toujours en cours...
+Les 5 commandes n'ont pas pu être lancées Centrifuge consomme beaucoup de RAM (killed par le système). 
 
 
 **Chloe**
@@ -275,6 +275,7 @@ Trichonephila clavata:
 Tropilaelaps mercedesae:
 `python3 /data/projet1/scripts/extract_contigs.py /data/projet1/results/kraken/tropilaelaps.txt /data/projet1/results/contaminants_contigs/tropilaelaps/tropilaelaps.csv /data/projet1/results/contaminants_contigs /data/projet1/data/genome/tropilaelaps_mercedesae/ncbi_dataset/data/GCA_002081605.1/GCA_002081605.1_T._mercedesae_v01_genomic.fna /data/projet1/results/bracken/tropilaelaps.bracken`
 
+
 ## 3/11 
 
 **Rose** 
@@ -291,19 +292,18 @@ Création de fichier FASTQ (en séparant les lectures paired-ends) à partir du 
 
 **Ikram** 
 
-Les contigs identifiés comme suspects contaminants sur le genome Oedothorax gibbosus par Kraken/Bracken ont été extraits et soumis à une analyse BLAST nucleotide (blastn) contre la base NCBI nr/nt: 
+Les contigs identifiés comme suspects contaminants sur le genome Oedothorax gibbosus par Kraken/Bracken ont été extraits et soumis à une analyse BLAST nucleotide (blastn) contre la base NCBI nr/nt afin d'identifier l'espece d'origine:
 
-
-Outil: https://blast.ncbi.nlm.nih.gov/Blast.cgi
-BLAST nucleotide (blastn) contre la base NCBI nr/nt pour identifier l’espèce:
+Outil: https://blast.ncbi.nlm.nih.gov/Blast.cgi 
+Analyse: BLAST nucleotide (blastn) contre la base NCBI nr/nt
+Origine des sequences: contigs provenants du genome de Oedothorax_gibbosus
 
 Sequences testées et résultats:
+- Sequence 55601 -> Hylyphantes graminicola (18S rRNA), 99,42% identité
 
-- 55601 -> Hylyphantes graminicola (18S rRNA), 99,42% identité
+- Sequence 931100 -> Wolbachia endosymbiont (strain wOegibbosus-W744x776A), 98,37% identité
 
-- 931100.fasta -> Wolbachia endosymbiont (strain wOegibbosus-W744x776A), 98,37% identité
-
-- 2720720.fasta -> Candidatus Rhabdoclamydia Rhabdochlamydia oedothoracis, 87,65% identité
+- Sequence 2720720 -> Candidatus Rhabdoclamydia Rhabdochlamydia oedothoracis, 87,65% identité
 
 
 ## 6/11
@@ -336,40 +336,67 @@ Telechargement des nouveaux reads (ancien code SRA incorrect)
 
 **Ikram**
 
-Mapping des lectures sur genomes des contaminants:
- (wolbachia comme contaminant principal)
+Mapping des lectures sur genomes des contaminants chosies:
+ (Wolbachia, candidatus, hylyphantes)
 
-- creation d'environnemnet mapping dans conda
-- installation de aligneur Minimap2:
- `conda install bioconda::minimap2`
-- indexation de genomes 
-- comparaison des fichiers de sortie 
-- sortie fichier fasta
-- controle qualité des fichiers
+- Creation d'environnemnet mapping dans conda
+- Installation de aligneur Minimap2:
+`conda install bioconda::minimap2` 
+- Installation de l’outil Samtools pour manipuler les fichiers SAM/BAM
+`conda install bioconda::samtools=1.22.1`
 
--Versions des outils:
-
+- Versions des outils:
 Minimap2: 2.30-r1287
 Samtools: 1.22.1
-SPAdes: 4.2.0
 
-indexation wolbachia 
+- Indexation des references:
+indexation wolbachia (fichiers d'indexation placés dans /data/projet1/data/references)
 `minimap2 -d /data/projet1/data/references/wolbachia.mmi /data/projet1/data/references/wolbachia.fna`
 
-mapping du contaminant wolbachia sur les reads de 
-`minimap2 -ax map-pb /data/projet1/data/references/wolbachia.mmi /data/projet1/data/reads/fastq/SRR13225169_1.fastq.gz > /data/projet1/results/mapping/wolbachia_SRR13225169.sam`
+indexation candidatus: 
+`minimap2 -d /data/projet1/data/references/wolbachia.mmi /data/projet1/data/references/wolbachia.fna`
 
-Conversion du fichier SAM en BAM indexé:
-`samtools view -bS /data/projet1/results/mapping/wolbachia_SRR13225169.sam | samtools sort -o /data/projet1/results/mapping/wolbachia_SRR13225169.bam && samtools index /data/projet1/results/mapping/wolbachia_SRR13225169.bam`
+indexation hylyphantes:
+`minimap2 -d /data/projet1/data/references/hylyphantes.mmi /data/projet1/data/references/hylyphantes.fna`
 
-verification finale de presence de contaminant sur le génome:
+- Mapping des lectures PacBio SMRT:
+Mapping des 3 contaminants sur les reads de Oedothorax_gibbosus et fusion des fichiers intermediaire pour n'obtenir qu'un ficheir BAM trié final:
 
-`samtools view -b -F 4 wolbachia_SRR13225169.bam > wolbachia_aligned.bam` 
+Wolbachia read 1 (SRR13225169_1.fastq):
+`minimap2 -ax map-pb /data/projet1/data/references/wolbachia.fna /data/projet1/data/reads/fastq/SRR13225169_1.fastq.gz | samtools sort -o /data/projet1/results/mapping/wolbachia_SRR13225169.bam`
 
-indexation hylyphantes
+Wolbachia read 2 (SRR13225170_1.fastq):
+`minimap2 -t 4 -ax map-pb /data/projet1/data/references/wolbachia.fna /data/projet1/data/reads/fastq/SRR13225170_1.fastq.gz | samtools sort -o /data/projet1/results/mapping/wolbachia_SRR13225170.bam`
+
+Candidatus read 1:
+`minimap2 -ax map-pb /data/projet1/data/references/candidatus.fna /data/projet1/data/reads/fastq/SRR13225169_1.fastq.gz | samtools sort -o /data/projet1/results/mapping/candidatus_SRR13225169.bam`
+
+Candidatus read 2:
+`minimap2 -ax map-pb /data/projet1/data/references/candidatus.fna /data/projet1/data/reads/fastq/SRR13225170_1.fastq.gz | samtools sort -o /data/projet1/results/mapping/candidatus_SRR13225170.bam`
+
+Hylyphantes read 1:
+`minimap2 -ax map-pb /data/projet1/data/references/hylyphantes.mmi /data/projet1/data/reads/fastq/SRR13225169_1.fastq.gz | samtools sort -o /data/projet1/results/mapping/hylyphantes_SRR13225169.bam`
+
+Hylyphantes read 2:
+`minimap2 -ax map-pb /data/projet1/data/references/hyliphantes.fna /data/projet1/data/reads/fastq/SRR13225170_1.fastq.gz | samtools sort -o /data/projet1/results/mapping/hyliphantes_SRR13225170.bam`
 
 ## 7/11
 
 **Chloë**
 
 Rédaction du README
+
+##8/11
+
+**Ikram**
+Suite du mapping +
+
+Verification du nombre de reads mappés pour chaque reference:
+(exemple de commande utilisée pour Wolbachia):
+`samtools view -c /data/projet1/results/mapping/wolbachia_SRR13225169.bam` 
+
+verification finale de presence de contaminant sur le génome:
+`samtools view -b -F 4 wolbachia_SRR13225169.bam > wolbachia_aligned.bam` 
+
+**Rose**
+Suppression des fichiers SRA afin de gagner de la place pour le mapping 
