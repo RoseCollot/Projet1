@@ -1,15 +1,11 @@
 # Projet 1 (PTU) 
 ## Détection, caractérisation et assemblage de génomes contaminants dans des données génomiques d’arachnides
 
-<img src="https://srs.britishspiders.org.uk/cache/fe4dc530.jpg" width="150" height="150">
-
-<img src="https://indiabiodiversity.org/files-api/api/get/crop/observations//7e82c75b-3d21-4f42-869f-925118e84594/1a9764ac700e4a96865df3ed0544479e.jpg?h=500" width="150" height="150">
-
-<img src="https://singapore.biodiversity.online/taxo4254/mainSpace/files/Np.%20pilipes%20%28female%29.jpg" width="150" height="150">
-
-<img src="https://beeaware.org.au/wp-content/uploads/2014/04/Tropilaelaps-7.jpg" width="150" height="150">
-
-<img src="https://happymag.tv/wp-content/uploads/2021/09/Oppiella-nova-beetle-mite-1.jpg" width="150" height="150">
+<img src="https://srs.britishspiders.org.uk/cache/fe4dc530.jpg" width="130" height="130">
+<img src="https://indiabiodiversity.org/files-api/api/get/crop/observations//7e82c75b-3d21-4f42-869f-925118e84594/1a9764ac700e4a96865df3ed0544479e.jpg?h=500" width="130" height="130">
+<img src="https://singapore.biodiversity.online/taxo4254/mainSpace/files/Np.%20pilipes%20%28female%29.jpg" width="130" height="130">
+<img src="https://beeaware.org.au/wp-content/uploads/2014/04/Tropilaelaps-7.jpg" width="130" height="130">
+<img src="https://happymag.tv/wp-content/uploads/2021/09/Oppiella-nova-beetle-mite-1.jpg" width="130" height="130">
 
 Images: Tylan Berry (https://srs.britishspiders.org.uk)
 Devin (https://indiabiodiversity.org)
@@ -56,10 +52,14 @@ Dans l'environnement 'kraken_env' :
 - blast version 2.17.0
 - python version 3.13.7
 
+Kraken2 : https://github.com/DerrickWood/kraken2
+
 Dans l'environnement 'omark_env' :
 - omamer version 2.1.0 
 - omark version 0.3.1 
 - python version 3.10.19
+
+OMArk : https://github.com/DessimozLab/OMArk
 
 Dans l'environnement 'mapping_env' :
 - minimap2 version 2.30
@@ -140,6 +140,3 @@ Tuteur: Yannis Nevers
 Nous tenons à remercier notre tuteur Yannis Nevers pour son accompagnement, sa disponibilité et ses idées qui ont permis de réaliser ce projet. 
 
 Nous tenons également à remercier l'université de Strasbourg de nous avoir donné accès au serveur sur lesquel nous avons travaillé.
-
-
-
